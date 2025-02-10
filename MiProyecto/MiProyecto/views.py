@@ -1,21 +1,25 @@
 from django.http import HttpResponse
+from django.template import Context, Template
 def bienvenida(request):
     return HttpResponse("Bienvenido a mi pagina web en Django")
 def bienvenida2(request):
     return HttpResponse("<p style='color: red'>Bienvenido a mi pagina web en Django</p>")
 
-def categoriaEdad(request, edad):
-    if edad >= 18:
-        if edad>=60:
-            categoria = "Eres mayor de edad y tienes mas de 60 años"
-        else:
-            categoria = "Eres mayor de edad"
-    else:
-        if edad < 10:
-            categoria = "Eres menor de edad y tienes menos de 10 años"
-        else:
-            categoria = "Eres menor de edad"
-    resultado = "<h1>Categoria de la edad: %s</h1>" %categoria
+def contenidoHTML(request, nombre, edad):
+    contenido = """
+    <html>
+    <body>
+    <p>Nombre:%s / Edad:%s
+    </p>
+    </body>
+    </html>
+    """ % (nombre, edad)
+    return HttpResponse(contenido)
 
-    return HttpResponse(resultado)
-    
+def miPrimeraPlantilla(request):
+    plantillaExterna = open("/var/www/html/django/MiProyecto/MiProyecto/plantillas/miPrimeraPlantilla.html")
+    template = Template(plantillaExterna.read())
+    plantillaExterna.close()
+    contexto = Context()
+    documento = template.render(contexto)
+    return HttpResponse(documento)

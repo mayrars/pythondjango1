@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from MiProyecto.views import bienvenida, bienvenida2
-from MiProyecto.views import categoriaEdad
+from MiProyecto.views import contenidoHTML
+from MiProyecto.views import miPrimeraPlantilla
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bienvenida/', bienvenida),
     path('bienvenida2/', bienvenida2),
-    path('categoria/<int:edad>/', categoriaEdad)
+    path('contenidoHTML/<nombre>/<int:edad>/', contenidoHTML),
+    path('miPrimeraPlantilla/', miPrimeraPlantilla)
 ]
