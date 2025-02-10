@@ -1,3 +1,4 @@
+import datetime
 from django.http import HttpResponse
 from django.template import Context, Template
 def bienvenida(request):
@@ -21,5 +22,16 @@ def miPrimeraPlantilla(request):
     template = Template(plantillaExterna.read())
     plantillaExterna.close()
     contexto = Context()
+    documento = template.render(contexto)
+    return HttpResponse(documento)
+
+def plantillaParametros(request):
+    nombre="Luisa"
+    fechaActual = datetime.datetime.now()
+    lenguajes = ["Python", "Java", "C#", "C++", "JavaScript"]
+    plantillaExterna = open("/var/www/html/django/MiProyecto/MiProyecto/plantillas/plantillaParametros.html")
+    template = Template(plantillaExterna.read())
+    plantillaExterna.close()
+    contexto = Context({"nombre":nombre, "fechaActual": fechaActual, "lenguajes":lenguajes})
     documento = template.render(contexto)
     return HttpResponse(documento)

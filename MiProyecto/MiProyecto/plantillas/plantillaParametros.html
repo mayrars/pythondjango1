@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        li{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nombre: {{nombre}}</h1>
+    <h2>Fecha Actual: {{fechaActual.day}} / {{fechaActual.month}} / {{fechaActual.year}}</h2>
+    <h3>Numero de lenguajes: {{lenguajes|length}}</h3>
+    <ul>
+        {% for leng in lenguajes %}
+            {% if leng == 'Python' %}
+                <li style="color: red;"><strong>{{leng}}</strong></li>
+            {% else %}
+                <li>{{leng|first}}: {{leng | lower}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
