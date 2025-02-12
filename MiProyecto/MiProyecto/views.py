@@ -53,3 +53,9 @@ def plantillaShortCut(request):
     lenguajes = ["Python", "Ruby", "Java", "PHP", "C#", "C++", "JavaScript"]
 
     return render(request, "plantillaParametros.html", {"nombre":nombre, "fechaActual": fechaActual, "lenguajes":lenguajes})
+
+def plantillaHija1(request):
+    return render(request, "plantillaHija_1.html",{})
+
+def plantillaHija2(request):
+    return render(request, "plantillaHija_2.html",{})
