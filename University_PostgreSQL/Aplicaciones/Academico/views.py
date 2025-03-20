@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from .models import Curso
 
@@ -33,3 +33,16 @@ class CursoListView(ListView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Gestion de Cursos'
         return context
+    
+def eliminar_curso(request, id):
+    curso = Curso.objects.get(id=id)
+    curso.delete()
+    return redirect('/')
+
+def registrar_curso(request):
+    nombre = request.POST['txtNombre']
+    creditos = request.POST['numCreditos']
+    curso = Curso.objects.create(nombre=nombre, creditos=creditos)
+    return redirect('/')
+
+    
