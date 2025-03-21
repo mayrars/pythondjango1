@@ -19,7 +19,6 @@ def home(request):
         'titulo': 'Gestion de Cursos',
         'cursos': cursosListados
     }
-    #return render(request, 'gestionCursos.html', {'cursos': cursosListados})
     return render(request, 'gestionCursos.html', data)
 
 class CursoListView(ListView):
@@ -45,4 +44,24 @@ def registrar_curso(request):
     curso = Curso.objects.create(nombre=nombre, creditos=creditos)
     return redirect('/')
 
+def edicion_curso(request, id):
+    curso = Curso.objects.get(id=id)
+    data = {
+        'titulo': 'Edicion de Curso',
+        'curso': curso
+    }
+
+    return render(request, 'edicionCursos.html', data)
+
+def editar_curso(request):
+    id = int(request.POST['txtId'])
+    nombre = request.POST['txtNombre']
+    creditos = request.POST['numCreditos']
+
+    curso = Curso.objects.get(id=id)
+    curso.nombre = nombre
+    curso.creditos = creditos
     
+    curso.save()
+
+    return redirect('/')
