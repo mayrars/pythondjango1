@@ -65,3 +65,7 @@ def editar_curso(request):
     curso.save()
 
     return redirect('/')
+
+
+def contacto(request):
+    return render(request, 'contacto.html')
